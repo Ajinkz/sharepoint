@@ -30,44 +30,6 @@ Upload file in specific folder i.e /folderA/folderB
 ```
 PUT https://graph.microsoft.com/v1.0/drives/{drive_id}/root:/{directory-relative-path}/{file_url}:/content
 ```
-
-### [Upload file using Shareplum library](shareplum_upload.py)
-
-
-```python
-
-import os
-#from config import config
-from shareplum import Site
-from shareplum import Office365
-from shareplum.site import Version
-
-
-# get data from configuration
-username = '' # user mail id
-password = ''
-basepath = '' # 'https://xxxxxxx.sharepoint.com/'
-sitename = '' # 'https://xxxxxxx.sharepoint.com/sites/xxxxxx'
-dirname = ''  # directory where file is suppose to upload
-
-authcookie = Office365(basepath, username=username, password=password).GetCookies()
-
-site = Site(sitename,version=Version.v365, authcookie=authcookie)
-
-spfolder = site.Folder('Shared Documents/'+ dirname)
-
-# filename along with its path
-filepath = "exported-data.csv"
-
-with open(filepath, 'rb') as file_input:
-    try: 
-        spfolder.upload_file(file_input, filepath)
-        print("file uploaded")
-    except Exception as err: 
-        print("Some error occurred: " + str(err))
-        
-```
-
 Using Graph API
 ```python
 import adal
@@ -135,3 +97,48 @@ else:
     
 
 ```
+
+
+### [Upload file using Shareplum library](shareplum_upload.py)
+
+
+```python
+
+import os
+#from config import config
+from shareplum import Site
+from shareplum import Office365
+from shareplum.site import Version
+
+
+# get data from configuration
+username = '' # user mail id
+password = ''
+basepath = '' # 'https://xxxxxxx.sharepoint.com/'
+sitename = '' # 'https://xxxxxxx.sharepoint.com/sites/xxxxxx'
+dirname = ''  # directory where file is suppose to upload
+
+authcookie = Office365(basepath, username=username, password=password).GetCookies()
+
+site = Site(sitename,version=Version.v365, authcookie=authcookie)
+
+spfolder = site.Folder('Shared Documents/'+ dirname)
+
+# filename along with its path
+filepath = "exported-data.csv"
+
+with open(filepath, 'rb') as file_input:
+    try: 
+        spfolder.upload_file(file_input, filepath)
+        print("file uploaded")
+    except Exception as err: 
+        print("Some error occurred: " + str(err))
+        
+```
+
+References
+
+- https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-with-folders-and-files-with-rest
+- https://docs.microsoft.com/en-us/onedrive/developer/rest-api/resources/site?view=odsp-graph-online
+- https://stackoverflow.com/questions/45406451/how-can-i-get-the-siteid-of-the-current-site-with-microsoft-graph-api
+- 
