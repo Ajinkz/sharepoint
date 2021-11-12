@@ -1,5 +1,9 @@
-# sharepoint
-office 365 - sharepoint - python
+## Sharepoint file upload
+
+
+### [Upload file using Graph API](graphapi_upload.py )
+
+### [Upload file using Shareplum library](shareplum_upload.py)
 
 
 ```python
