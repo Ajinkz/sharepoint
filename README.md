@@ -3,6 +3,34 @@
 
 ### [Upload file using Graph API](graphapi_upload.py )
 
+#### Prequisite
+ - Office365 account crendentials
+ - Azure App with credentials and required scopes
+
+
+Site id of required sharepoint site
+```
+GET https://graph.microsoft.com/v1.0/sites/organization.sharepoint.com:/sites/sharedlib
+Site id can be found in return object inside id string (among 3 values 2nd value is site id)
+id: site, site_id, web.id
+```
+
+Site's drive_id
+```
+GET https://graph.microsoft.com/v1.0/sites/{site_id}/drive
+id: drive_id
+```
+Upload file in root folder i.e. https://organization.sharepoint.com/sites/site-name/Shared%20Documents/Forms/AllItems.aspx
+
+```
+PUT https://graph.microsoft.com/v1.0/drives/{drive_id}/root:/{file_url}:/content
+```
+
+Upload file in specific folder i.e /folderA/folderB
+```
+PUT https://graph.microsoft.com/v1.0/drives/{drive_id}/root:/{directory-relative-path}/{file_url}:/content
+```
+
 ### [Upload file using Shareplum library](shareplum_upload.py)
 
 
