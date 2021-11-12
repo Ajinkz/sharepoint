@@ -38,14 +38,6 @@ with open(filepath, 'rb') as file_input:
 
 Using Graph API
 ```python
-
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 12 14:37:19 2021
-
-@author: ajinkya
-"""
-
 import adal
 import json
 import requests
@@ -73,8 +65,8 @@ token = context.acquire_token_with_client_credentials(
 request_headers = {'Authorization': 'bearer %s'%(token['accessToken'])}
 
 # Get Site id ------------
-# GET https://graph.microsoft.com/v1.0/sites/ajinkyapathak.sharepoint.com:/sites/sharedlib
-site_api = f"{ resource_URL }/v1.0/sites/ajinkyapathak.sharepoint.com:{relative_site_path}"
+# GET https://graph.microsoft.com/v1.0/sites/organization.sharepoint.com:/sites/sharedlib
+site_api = f"{ resource_URL }/v1.0/sites/organization.sharepoint.com:{relative_site_path}"
 site_api_res = requests.get(site_api, headers=request_headers)
 if site_api_res.status_code == 200:
     print("succeed\n",site_api_res.json())
